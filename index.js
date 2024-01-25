@@ -10,10 +10,10 @@ const main = async () => {
     await db.authenticate();
     asociations();
     await db.sync({ force: false });
-    console.log("La conexion a la base de datos es exitosa");
+    console.log("The database connection has been successful.");
 
     server.listen(PORT, () => {
-      console.log(`Servidor levantado en el puerto ${PORT}`);
+      console.log(`Server raised on port ${PORT}`);
     });
   } catch (err) {
     console.log(err);

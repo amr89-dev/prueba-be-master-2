@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
+//const jwt = require("jsonwebtoken");
 const TokenService = require("../services/token.service");
 const Token = require("../db/models/token.model");
 require("dotenv").config();
@@ -9,9 +9,12 @@ const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/tokenGenerator.js");
+const validatorHandler = require("../middlewares/validator.handler.js");
+const { loginSchema } = require("../middlewares/schemas/user.schema.js");
 
 router.post(
   "/login",
+  validatorHandler(loginSchema, "body"),
   passport.authenticate("local", { session: false }),
   async (req, res, next) => {
     try {
@@ -51,7 +54,7 @@ router.get(
   }
 );
 
-router.get("/token", async (req, res, next) => {
+/* router.get("/token", async (req, res, next) => {
   try {
     const { authorization } = req.headers;
     const token = !authorization.split(" ")[1]
@@ -79,6 +82,6 @@ router.get("/token", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+}); */
 
 module.exports = router;
