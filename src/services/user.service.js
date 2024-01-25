@@ -21,8 +21,18 @@ class UserService {
     return users;
   }
 
+  async findByEmail(email) {
+    const user = await User.findOne({
+      where: { email },
+    });
+
+    return user;
+  }
+
   async findOne(id) {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ["password"] },
+    });
     if (!user) {
       throw boom.notFound("User not found");
     }

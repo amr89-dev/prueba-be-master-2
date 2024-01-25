@@ -54,7 +54,7 @@ userRouter.put(
     const { body: user } = req;
     try {
       const updatedUser = await userService.update(id, user);
-      res.status(200).json(updatedUser);
+      res.status(200).json({ message: "User updated", data: updatedUser });
     } catch (err) {
       next(err);
     }

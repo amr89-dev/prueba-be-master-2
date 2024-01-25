@@ -3,7 +3,7 @@ const Joi = require("joi");
 const id = Joi.string().uuid();
 const email = Joi.string().email();
 const password = Joi.string().min(8);
-const role = Joi.string().min(5);
+const role = Joi.string().valid("admin", "user", "member");
 
 const createUserSchema = Joi.object({
   email: email.required(),
@@ -12,7 +12,7 @@ const createUserSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  email: email,
+  password: password,
   role: role,
 });
 
