@@ -1,8 +1,7 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const { sequelize } = require("../db");
-const Token = require("./token.model");
+const db = require("../db");
 
-const User = sequelize.define("user", {
+const User = db.define("user", {
   id: {
     allowNull: false,
     primaryKey: true,
