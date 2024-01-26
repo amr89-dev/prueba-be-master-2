@@ -7,7 +7,7 @@ const videoService = new VideoService();
 
 router.get("/", async (req, res, next) => {
   try {
-    const videos = await videoService.find();
+    const videos = await videoService.findPublic();
     res.status(200).json(videos);
   } catch (err) {
     next(err);

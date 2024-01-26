@@ -7,6 +7,7 @@ const url = Joi.string().uri();
 const publishedAt = Joi.date();
 const credits = Joi.string().min(1);
 const userId = Joi.string().uuid();
+const isPublic = Joi.boolean();
 
 const createVideoSchema = Joi.object({
   title: title.required(),
@@ -15,6 +16,7 @@ const createVideoSchema = Joi.object({
   credits: credits.required(),
   publishedAt: publishedAt.required(),
   userId: userId.required(),
+  isPublic: isPublic,
 });
 
 const updateVideoSchema = Joi.object({

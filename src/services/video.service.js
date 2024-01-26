@@ -7,8 +7,10 @@ class VideoService {
     return newVideo;
   }
 
-  async find() {
-    const videos = await Video.findAll();
+  async findPublic() {
+    const videos = await Video.findAll({
+      where: { isPublic: true },
+    });
     return videos;
   }
 
