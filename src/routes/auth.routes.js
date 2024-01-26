@@ -1,16 +1,17 @@
 const router = require("express").Router();
 const passport = require("passport");
-//const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const TokenService = require("../services/token.service");
+const service = new TokenService();
 const Token = require("../db/models/token.model");
 require("dotenv").config();
-const service = new TokenService();
 const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../utils/tokenGenerator.js");
 const validatorHandler = require("../middlewares/validator.handler.js");
 const { loginSchema } = require("../middlewares/schemas/auth.schema.js");
+const { JWT_REFRESH_SECRET } = process.env;
 
 router.post(
   "/login",
@@ -41,7 +42,7 @@ router.get(
     try {
       const token = await Token.findOne({
         where: {
-          user_id: req.user.sub,
+          userId: req.user.sub,
         },
         order: [["createdAt", "DESC"]],
       });
@@ -54,19 +55,23 @@ router.get(
   }
 );
 
-/* router.get("/token", async (req, res, next) => {
+router.get("/token", async (req, res, next) => {
   try {
     const { authorization } = req.headers;
+
     const token = !authorization.split(" ")[1]
       ? null
       : authorization.split(" ")[1].replace(/^"(.*)"$/, "$1");
     if (!token) {
-      throw new Error();
+      throw new Error("No token provided in authorization header");
     }
-
     const tokenFound = await Token.findOne({
       where: { token },
     });
+
+    if (!tokenFound) {
+      throw new Error("Invalid token");
+    }
 
     const tokenVerify = await jwt.verify(tokenFound.token, JWT_REFRESH_SECRET);
 
@@ -82,6 +87,6 @@ router.get(
   } catch (error) {
     next(error);
   }
-}); */
+});
 
 module.exports = router;
