@@ -22,7 +22,7 @@ const ormErrorHandler = (err, req, res, next) => {
     next(err);
   }
 };
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _) => {
   if (err.name === "TokenExpiredError") {
     return res.status(498).json({
       message: err.message,
@@ -30,7 +30,7 @@ const errorHandler = (err, req, res, next) => {
     });
   }
   res.status(500).json({
-    message: "este es el error -->" + err.message,
+    message: err.message,
     stack: err.stack,
   });
 };

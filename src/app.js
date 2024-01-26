@@ -6,7 +6,7 @@ const {
   errorHandler,
   boomErrorHandler,
   ormErrorHandler,
-} = require("./middlewares/error.handler"); 
+} = require("./middlewares/error.handler");
 
 const server = express();
 server.use(express.json());
@@ -23,12 +23,12 @@ const options = {
   },
 };
 server.use(cors(options));
-//require("./utils/auth/index");
+require("./utils/auth/index");
 routerApi(server);
 
 server.use(errorLog);
 server.use(ormErrorHandler);
 server.use(boomErrorHandler);
-server.use(errorHandler); 
+server.use(errorHandler);
 
 module.exports = server;

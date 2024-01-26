@@ -10,7 +10,7 @@ const {
   generateRefreshToken,
 } = require("../utils/tokenGenerator.js");
 const validatorHandler = require("../middlewares/validator.handler.js");
-const { loginSchema } = require("../middlewares/schemas/user.schema.js");
+const { loginSchema } = require("../middlewares/schemas/auth.schema.js");
 
 router.post(
   "/login",
