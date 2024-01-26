@@ -18,6 +18,7 @@ class VideoService {
           attributes: ["id", "userId"],
         },
       ],
+      order: [["likes", "DESC"]],
     });
     return videos;
   }
@@ -31,6 +32,7 @@ class VideoService {
           attributes: ["id", "userId"],
         },
       ],
+      order: [["likes", "DESC"]],
     });
     return videos;
   }

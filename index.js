@@ -1,5 +1,5 @@
 require("dotenv").config();
-const server = require("./src/app");
+const createServer = require("./src/app.js");
 const asociations = require("./src/db/associations.js");
 const db = require("./src/db/db.js");
 
@@ -11,7 +11,7 @@ const main = async () => {
     asociations();
     await db.sync({ force: false });
     console.log("The database connection has been successful.");
-
+    const server = await createServer();
     server.listen(PORT, () => {
       console.log(`Server raised on port ${PORT}`);
     });

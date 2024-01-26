@@ -33,7 +33,7 @@ const Video = db.define("video", {
     allowNull: false,
     defaultValue: true,
   },
-  like: {
+  likes: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },

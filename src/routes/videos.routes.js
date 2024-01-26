@@ -56,6 +56,16 @@ router.put("/:videoId", async (req, res, next) => {
   }
 });
 
+router.patch("/:videoId", async (req, res, next) => {
+  const { videoId } = req.params;
+  try {
+    const video = await videoService.updateLikes(videoId);
+    res.status(200).json(video);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete("/:videoId", async (req, res, next) => {
   const { videoId } = req.params;
   try {

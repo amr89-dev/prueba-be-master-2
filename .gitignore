@@ -36,6 +36,7 @@ pids
 *.pid.lock
 lib-cov
 coverage
+coverage_e2e
 .nyc_output
 .grunt
 bower_components
