@@ -14,6 +14,11 @@ class VideoService {
     return videos;
   }
 
+  async findAll() {
+    const videos = await Video.findAll();
+    return videos;
+  }
+
   async findOne(id) {
     const video = await Video.findByPk(id);
     if (!video) {
