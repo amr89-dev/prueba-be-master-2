@@ -6,6 +6,7 @@ const description = Joi.string().min(1);
 const url = Joi.string().uri();
 const publishedAt = Joi.date();
 const credits = Joi.string().min(1);
+const userId = Joi.string().uuid();
 
 const createVideoSchema = Joi.object({
   title: title.required(),
@@ -13,6 +14,7 @@ const createVideoSchema = Joi.object({
   url: url.required(),
   credits: credits.required(),
   publishedAt: publishedAt.required(),
+  userId: userId.required(),
 });
 
 const updateVideoSchema = Joi.object({

@@ -21,6 +21,7 @@ const Video = db.define("video", {
   },
   publishedAt: {
     type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
     allowNull: false,
   },
   credits: {

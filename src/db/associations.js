@@ -24,6 +24,7 @@ const asociations = () => {
   Comment.belongsTo(User, {
     foreignKey: "userId",
     as: "user",
+    allowNull: true,
   });
 
   Video.hasMany(Comment, {
@@ -44,6 +45,7 @@ const asociations = () => {
   Like.belongsTo(User, {
     foreignKey: "userId",
     as: "user",
+    allowNull: true,
   });
 
   Video.hasMany(Like, {
