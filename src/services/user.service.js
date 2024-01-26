@@ -1,6 +1,7 @@
 const boom = require("@hapi/boom");
 const User = require("../db/models/user.model");
 const bcrypt = require("bcrypt");
+const Video = require("../db/models/video.model");
 
 class UserService {
   async create(data) {
@@ -32,6 +33,13 @@ class UserService {
   async findOne(id) {
     const user = await User.findByPk(id, {
       attributes: { exclude: ["password"] },
+      include: [
+        {
+          model: Video,
+          as: "videos",
+          attributes: ["id", "title", "description"],
+        },
+      ],
     });
     if (!user) {
       throw boom.notFound("User not found");

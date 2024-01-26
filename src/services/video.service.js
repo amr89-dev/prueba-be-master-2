@@ -1,3 +1,5 @@
+const Comment = require("../db/models/comment.model");
+const Like = require("../db/models/like.model");
 const Video = require("../db/models/video.model");
 const boom = require("@hapi/boom");
 
@@ -10,13 +12,54 @@ class VideoService {
   async findPublic() {
     const videos = await Video.findAll({
       where: { isPublic: true },
+      include: [
+        {
+          model: Comment,
+          as: "comments",
+          attributes: ["id", "userId"],
+        },
+        {
+          model: Like,
+          as: "likes",
+          attributes: ["id", "userId"],
+        },
+      ],
     });
     return videos;
   }
 
   async findAll() {
-    const videos = await Video.findAll();
+    const videos = await Video.findAll({
+      include: [
+        {
+          model: Comment,
+          as: "comments",
+          attributes: ["id", "userId"],
+        },
+        {
+          model: Like,
+          as: "likes",
+          attributes: ["id", "userId"],
+        },
+      ],
+    });
     return videos;
+  }
+  async findPublicByUserId(userId) {
+    const videos = await Video.findAll({
+      where: { userId, isPublic: true },
+    });
+    return videos;
+  }
+
+  async findOnePublic(id) {
+    const video = await Video.findOne({
+      where: { id, isPublic: true },
+    });
+    if (!video) {
+      throw boom.notFound("Video not found");
+    }
+    return video;
   }
 
   async findOne(id) {
