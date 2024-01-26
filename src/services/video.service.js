@@ -1,5 +1,4 @@
 const Comment = require("../db/models/comment.model");
-const Like = require("../db/models/like.model");
 const Video = require("../db/models/video.model");
 const boom = require("@hapi/boom");
 
@@ -18,11 +17,6 @@ class VideoService {
           as: "comments",
           attributes: ["id", "userId"],
         },
-        {
-          model: Like,
-          as: "likes",
-          attributes: ["id", "userId"],
-        },
       ],
     });
     return videos;
@@ -34,11 +28,6 @@ class VideoService {
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "userId"],
-        },
-        {
-          model: Like,
-          as: "likes",
           attributes: ["id", "userId"],
         },
       ],

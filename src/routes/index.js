@@ -2,7 +2,6 @@ const express = require("express");
 const userRoutes = require("./users.routes.js");
 const videoRoutes = require("./videos.routes.js");
 const commentRoutes = require("./comments.routes.js");
-const likeRoutes = require("./likes.routes.js");
 const authRouter = require("./auth.routes.js");
 
 function routerApi(server) {
@@ -11,7 +10,6 @@ function routerApi(server) {
   router.use("/users", userRoutes);
   router.use("/videos", videoRoutes);
   router.use("/comments", commentRoutes);
-  router.use("/likes", likeRoutes);
   router.use("/auth", authRouter);
 }
 module.exports = routerApi;
