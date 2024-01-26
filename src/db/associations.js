@@ -1,6 +1,5 @@
 const User = require("./models/user.model");
 const Comment = require("./models/comment.model");
-const Like = require("./models/like.model");
 const Video = require("./models/video.model");
 const Token = require("./models/token.model");
 
@@ -33,27 +32,6 @@ const asociations = () => {
   });
 
   Comment.belongsTo(Video, {
-    foreignKey: "videoId",
-    as: "video",
-  });
-
-  User.hasMany(Like, {
-    foreignKey: "userId",
-    as: "likes",
-  });
-
-  Like.belongsTo(User, {
-    foreignKey: "userId",
-    as: "user",
-    allowNull: true,
-  });
-
-  Video.hasMany(Like, {
-    foreignKey: "videoId",
-    as: "likes",
-  });
-
-  Like.belongsTo(Video, {
     foreignKey: "videoId",
     as: "video",
   });

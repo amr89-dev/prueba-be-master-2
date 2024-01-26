@@ -33,6 +33,10 @@ const Video = db.define("video", {
     allowNull: false,
     defaultValue: true,
   },
+  like: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = Video;

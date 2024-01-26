@@ -75,6 +75,11 @@ class VideoService {
     const videoUpdated = await video.update(changes);
     return videoUpdated;
   }
+  async updateLikes(id) {
+    const video = await this.findOne(id);
+    const videoUpdated = await video.update({ like: video.like + 1 });
+    return videoUpdated;
+  }
 
   async delete(id) {
     const video = await this.findOne(id);
