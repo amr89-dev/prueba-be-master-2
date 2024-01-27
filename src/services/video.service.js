@@ -11,13 +11,13 @@ class VideoService {
   async findPublic() {
     const videos = await Video.findAll({
       where: { isPublic: true },
-      include: [
+      /* include: [
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "userId", "comment"],
+          attributes: ["id", "userId", "comments"],
         },
-      ],
+      ], */
       order: [["likes", "DESC"]],
     });
     return videos;
@@ -29,7 +29,7 @@ class VideoService {
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "userId", "comment"],
+          attributes: ["id", "userId", "comments"],
         },
       ],
       order: [["likes", "DESC"]],
