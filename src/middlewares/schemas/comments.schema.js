@@ -8,7 +8,7 @@ const createdAt = Joi.date();
 
 const createCommentSchema = Joi.object({
   videoId: videoId.required(),
-  userId: userId.required(),
+  userId,
   comment: comment.required(),
   createdAt: createdAt.required(),
 });

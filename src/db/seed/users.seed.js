@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const User = require("../models/user.model.js");
 
 const userData = [
@@ -13,8 +14,21 @@ const userData = [
   },
 ];
 
+const generateUserData = async () => {
+  const users = userData.map(async (user) => {
+    const hash = await bcrypt.hash(user.password, 10);
+    return {
+      ...user,
+      password: hash,
+    };
+  });
+
+  return Promise.all(users);
+};
+
 async function createUsers() {
   try {
+    const userData = await generateUserData();
     const userCount = await User.count();
     if (userCount <= 0) {
       await User.bulkCreate(userData);

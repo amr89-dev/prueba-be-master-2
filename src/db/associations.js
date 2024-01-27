@@ -34,6 +34,7 @@ const asociations = () => {
   Comment.belongsTo(Video, {
     foreignKey: "videoId",
     as: "video",
+    allowNull: false,
   });
 
   User.hasMany(Token, {
