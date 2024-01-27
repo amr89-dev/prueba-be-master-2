@@ -7,7 +7,7 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "lint": "eslint",
-    "test": "jest --config ./jest.config.json --verbose --detectOpenHandles --forceExit",
+    "test": "jest --config ./jest.config.json --verbose --detectOpenHandles --runInBand --forceExit",
     "test:coverage": "jest --config ./jest.config.json --verbose --detectOpenHandles  --coverage --forceExit"
   },
   "keywords": [],
