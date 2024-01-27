@@ -1,4 +1,4 @@
-const Comment = require("../db/models/comment.model");
+//const Comment = require("../db/models/comment.model");
 const Video = require("../db/models/video.model");
 const boom = require("@hapi/boom");
 
@@ -12,12 +12,12 @@ class VideoService {
     const videos = await Video.findAll({
       where: { isPublic: true },
       /* include: [
-        {
-          model: Comment,
-          as: "comments",
-          attributes: ["id", "userId", "comments"],
-        },
-      ], */
+          {
+            model: Comment,
+            as: "comments",
+            attributes: ["id", "userId", "comments"],
+          },
+        ], */
       order: [["likes", "DESC"]],
     });
     return videos;
@@ -25,13 +25,13 @@ class VideoService {
 
   async findAll() {
     const videos = await Video.findAll({
-      include: [
-        {
+      /*  include: [
+         {
           model: Comment,
           as: "comments",
           attributes: ["id", "userId", "comments"],
         },
-      ],
+      ], */
       order: [["likes", "DESC"]],
     });
     return videos;

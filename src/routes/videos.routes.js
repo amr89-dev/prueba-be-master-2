@@ -8,16 +8,17 @@ const videoService = new VideoService();
 
 router.get("/", isAuth(), async (req, res, next) => {
   try {
-    if (!req.isAuth) {
-      const videos = await videoService.findPublic();
-      return res.status(200).json(videos);
+    if (req.isAuth) {
+      const videos = await videoService.findAll();
+      res.status(200).json(videos);
     }
-    const videos = await videoService.findAll();
-    res.status(200).json(videos);
+    const videos = await videoService.findPublic();
+    return res.status(200).json(videos);
   } catch (err) {
     next(err);
   }
 });
+
 
 router.get("/:videoId", isAuth(), async (req, res, next) => {
   const { videoId } = req.params;

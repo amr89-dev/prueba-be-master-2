@@ -5,6 +5,7 @@ const commentRoutes = require("./comments.routes.js");
 const authRouter = require("./auth.routes.js");
 
 function routerApi(server) {
+  
   const router = express.Router();
   server.use("/api/v1", router);
   router.use("/users", userRoutes);

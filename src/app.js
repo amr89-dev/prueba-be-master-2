@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+
 const routerApi = require("./routes");
 const {
   errorLog,
@@ -23,6 +24,7 @@ const createServer = () => {
       }
     },
   };
+
   server.use(cors(options));
   require("./utils/auth/index");
   routerApi(server);
