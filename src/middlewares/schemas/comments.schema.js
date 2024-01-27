@@ -14,7 +14,7 @@ const createCommentSchema = Joi.object({
 });
 
 const updateCommentSchema = Joi.object({
-  comment: comment,
+  comment: comment.required(),
 });
 
 const getCommentSchema = Joi.object({

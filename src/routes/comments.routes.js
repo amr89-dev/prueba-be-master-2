@@ -5,7 +5,6 @@ const validatorHandler = require("../middlewares/validator.handler");
 const {
   createCommentSchema,
   updateCommentSchema,
-  getCommentSchema,
 } = require("../middlewares/schemas/comments.schema");
 const commentService = new CommentService();
 
@@ -31,19 +30,15 @@ router.post(
   }
 );
 
-router.get(
-  "/:id",
-  validatorHandler(getCommentSchema, "body"),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const comment = await commentService.findOne(id);
-      res.status(200).json(comment);
-    } catch (err) {
-      next(err);
-    }
+router.get("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const comment = await commentService.findOne(id);
+    res.status(200).json(comment);
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 router.put(
   "/:id",
@@ -59,18 +54,14 @@ router.put(
   }
 );
 
-router.delete(
-  "/:id",
-  validatorHandler(getCommentSchema, "body"),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      await commentService.delete(id);
-      res.status(200).json({ message: "Comment deleted" });
-    } catch (err) {
-      next(err);
-    }
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await commentService.delete(id);
+    res.status(200).json({ message: "Comment deleted" });
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 module.exports = router;
