@@ -15,7 +15,7 @@ class VideoService {
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "userId"],
+          attributes: ["id", "userId", "comment"],
         },
       ],
       order: [["likes", "DESC"]],
@@ -29,7 +29,7 @@ class VideoService {
         {
           model: Comment,
           as: "comments",
-          attributes: ["id", "userId"],
+          attributes: ["id", "userId", "comment"],
         },
       ],
       order: [["likes", "DESC"]],
@@ -66,9 +66,11 @@ class VideoService {
     const videoUpdated = await video.update(changes);
     return videoUpdated;
   }
-  async updateLikes(id) {
+  async updateLikes(id, isLike) {
     const video = await this.findOne(id);
-    const videoUpdated = await video.update({ like: video.like + 1 });
+    const videoUpdated = await video.update({
+      likes: isLike ? video.likes + 1 : video.likes - 1,
+    });
     return videoUpdated;
   }
 

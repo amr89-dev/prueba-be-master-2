@@ -58,8 +58,9 @@ router.put("/:videoId", async (req, res, next) => {
 
 router.patch("/:videoId", async (req, res, next) => {
   const { videoId } = req.params;
+  const { isLike } = req.body;
   try {
-    const video = await videoService.updateLikes(videoId);
+    const video = await videoService.updateLikes(videoId, isLike);
     res.status(200).json(video);
   } catch (err) {
     next(err);
